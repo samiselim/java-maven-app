@@ -8,7 +8,7 @@ pipeline {
     // tools{
 
     // }
-    parameters{
+    parameters{ // Paramenters before Builtd start 
         // string(name : 'VERSION' ,defaultValue: '' , description: 'this var for .. ')
         choice(name: 'VERSION' , choices:['1.0' , '2.0' , '3.0'] , description: 'this is for .. ')
         booleanParam(name: 'executeTests' , defaultValue: true , description: 'this is for .. ')
@@ -42,6 +42,14 @@ pipeline {
             }
         }
         stage('deploy') {
+            input{
+                message "Please Enter your Environment for Deployment "
+                ok "Done"
+
+                parameters{ // Parameters during Build process 
+
+                }
+            }
             steps {
                 script {
                     echo "Deploying the application... Version : ${params.VERSION}"
