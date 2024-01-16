@@ -2,7 +2,7 @@
 CODE_CHANGES = getGitChanges()
 pipeline {
     agent none
-    enviroment{
+    environment{
         NEW_VERSION = '1.3.0'
         SERVER_CREDENTIALS = credentials('nexus-docker')
     }
