@@ -53,7 +53,7 @@ pipeline {
             // }
             steps {
                 script {
-                    env.ENV = input message: "Please Enter your Environment for Deployment ",ok: "Done",parameters:[choice(name: 'ENV' , choices:['dev' , 'test' , 'production'] , description: 'this is for .. ')]
+                    env.ENV = input message: "Enter your Environment for Deployment ",ok: "Done",parameters:[choice(name: 'ENV' , choices:['dev' , 'test' , 'production'] , description: 'this is for .. ')]
                     echo "Deploying the application... Version : ${params.VERSION}"
                     echo "deploying to ${ENV} Environment"
                     // withCredentials( [usernamePassword('nexus-docker' , usernameVar: USER ,passwordVar: PASSWORD)
