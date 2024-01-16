@@ -6,7 +6,7 @@ def buildJar() {
 def buildImage() {
     echo "building the docker image..."
     withCredentials([usernamePassword(credentialsId: 'sami_docker_hub_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t docker samiselim/demo-java-maven-app:jma-3.0 .'
+        sh 'docker build -t samiselim/demo-java-maven-app:jma-3.0 .'
         sh "echo $PASS | docker login -u $USER --password-stdin"
         sh 'docker push samiselim/demo-java-maven-app:jma-3.0'
     }
