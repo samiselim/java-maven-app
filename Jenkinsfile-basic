@@ -42,17 +42,18 @@ pipeline {
             }
         }
         stage('deploy') {
-            input{
-                message "Please Enter your Environment for Deployment "
-                ok "Done"
+            // input{
+            //     message "Please Enter your Environment for Deployment "
+            //     ok "Done"
 
-                parameters{ // Parameters during Build process 
-                    choice(name: 'ENV' , choices:['dev' , 'test' , 'production'] , description: 'this is for .. ')
+            //     parameters{ // Parameters during Build process 
+            //         choice(name: 'ENV' , choices:['dev' , 'test' , 'production'] , description: 'this is for .. ')
 
-                }
-            }
+            //     }
+            // }
             steps {
                 script {
+                    env.ENV = input message: "Please Enter your Environment for Deployment ",ok: "Done",parameters:[choice(name: 'ENV' , choices:['dev' , 'test' , 'production'] , description: 'this is for .. ')]
                     echo "Deploying the application... Version : ${params.VERSION}"
                     echo "deploying to ${ENV} Environment"
                     // withCredentials( [usernamePassword('nexus-docker' , usernameVar: USER ,passwordVar: PASSWORD)
