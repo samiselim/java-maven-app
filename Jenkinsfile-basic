@@ -39,10 +39,10 @@ pipeline {
                 script {
                     echo "Deploying the application... Version : ${params.VERSION}"
                     
-                    withCredentials(){
-                        usernamePassword(['nexus-docker' , usernameVar: USER ,passwordVar: PASSWORD]){
+                    withCredentials( [usernamePassword('nexus-docker' , usernameVar: USER ,passwordVar: PASSWORD)
                            sh "some Script ${USER} and ${PASSWORD}"   
-                        }
+                        ]){
+                       
                     }
 
                     
