@@ -22,13 +22,13 @@ pipeline {
             }
         }
         stage('test') {
-            steps {
-                when{
+            when{
                     expression{
                         // BRANHC_NAME == 'jenkins-branch' && CODE_CHANGES == true
                         params.executeTests == true
                     }
                 }
+            steps {
                 script {
                     echo "Testing the application..."
                 }
