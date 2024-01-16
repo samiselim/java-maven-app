@@ -15,5 +15,7 @@ def buildImage() {
 def deployApp() {
     echo 'deploying the application...'
 } 
-
+def fun(newVer){
+    echo "Building the application... version ${newVer}"
+}
 return this
