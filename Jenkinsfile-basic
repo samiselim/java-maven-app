@@ -1,4 +1,4 @@
-#!/usr/bin/env groovy
+
 pipeline {
     agent none
     environment{
@@ -39,11 +39,11 @@ pipeline {
                 script {
                     echo "Deploying the application... Version : ${params.VERSION}"
                     
-                    withCredentials( [usernamePassword('nexus-docker' , usernameVar: USER ,passwordVar: PASSWORD)
-                           sh "some Script ${USER} and ${PASSWORD}"   
-                        ]){
+                    // withCredentials( [usernamePassword('nexus-docker' , usernameVar: USER ,passwordVar: PASSWORD)
+                    //        sh "some Script ${USER} and ${PASSWORD}"   
+                    //     ]){
                        
-                    }
+                    // }
 
                     
                 }
