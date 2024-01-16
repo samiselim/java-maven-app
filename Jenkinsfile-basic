@@ -10,7 +10,7 @@ pipeline {
     // }
     parameters{
         // string(name : 'VERSION' ,defaultValue: '' , description: 'this var for .. ')
-        choice(name: 'VERSION' , choices['1.0' , '2.0' , '3.0'] , description: 'this is for .. ')
+        choice(name: 'VERSION' , choices:['1.0' , '2.0' , '3.0'] , description: 'this is for .. ')
         booleanParam(name: 'executeTests' , defaultValue: true , description: 'this is for .. ')
     }
     stages {
