@@ -41,11 +41,11 @@ def commitChanges(){
         sh 'git status'
         sh 'git branch'
         sh 'git config --list'
-        
+
         sh 'git remote set-url origin https://${USER}:${PASS}@github.com/samiselim/java-maven-app.git'
         sh 'git add .'
         sh 'git commit -m "this commit from jenkins "'
-        sh 'push origin HEAD:jenkins-update'
+        sh 'git push origin HEAD:jenkins-update'
     }
 }
 
