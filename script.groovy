@@ -41,8 +41,6 @@ def commitChanges(){
         sh 'git status'
         sh 'git branch'
         sh 'git config --list'
-        // sh 'git branch switch jenkins-update'
-        // sh "git remote set-url origin https://${USER}:${PASS}@github.com/samiselim/java-maven-app.git"
         git 'remote set-url origin https://samiselim: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@github.com/samiselim/java-maven-app.git'
         sh 'git add .'
         sh 'git commit -m "this commit from jenkins "'
