@@ -8,10 +8,13 @@ pipeline {
     stages {
         stage("init") {
             steps {
-                script {
+                script { 
                     gv = load "script.groovy"
                 }
             }
+        }
+        stage('Increment Version'){
+           gv.incVersion()
         }
         stage("build jar") {
             steps {
