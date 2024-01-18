@@ -33,18 +33,13 @@ def commitChanges(){
     echo "Committing changes to github repository"
      withCredentials([usernamePassword(credentialsId: 'sami_credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
       
-        /* Meta Data for jenkins server */
-        sh 'git config --global user.email "jenkins@example.com"'
-        sh 'git config --global user.name "jenkins"'
-
-        /* some information about our repo */
-        sh 'git status'
-        sh 'git branch'
-        sh 'git config --list'
+      
+       
         sh "git remote set-url origin https://${USER}:${PASS}@github.com/samiselim/java-maven-app.git"
         sh 'git add .'
         sh 'git commit -m "this commit from jenkins "'
         sh 'git push origin HEAD:jenkins-update'
+
     }
 }
 
