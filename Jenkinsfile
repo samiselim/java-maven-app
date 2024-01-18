@@ -13,8 +13,13 @@ pipeline {
                 }
             }
         }
-        stage('Increment Version'){
-           gv.incVersion()
+        stage("Increment Version"){
+            steps{
+                script{
+                    echo "Incrementing Application version "
+                    gv.incVersion()
+                }
+            }
         }
         stage("build jar") {
             steps {
