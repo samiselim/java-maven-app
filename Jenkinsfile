@@ -31,7 +31,7 @@ pipeline {
                 script {
                     def dockerCmd = 'docker run -d -p 3080:3080 samiselim/node-app:v1.0'
                     sshagent(['ec2-server-cred']) {
-                        sh "ssh -o StrictHostKeyChecking=0 ec2-user@54.93.142.184 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${dockerCmd}"
                     }
                     echo "deploying"
                     //gv.deployApp()
