@@ -27,10 +27,11 @@ def incVersion(){
 def deployApp() {
     echo 'deploying the application...'
     def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION}"
+    def ec2_instance = "ec2-user@54.93.142.184"
     sshagent(['ec2-server-cred']) {
-        sh 'scp server-cmds.sh ec2-user@54.93.142.184:/home/ec2-user'
-        sh 'scp docker-compose.yaml ec2-user@54.93.142.184:/home/ec2-user'
-        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${shellCmd}"
+        sh "scp server-cmds.sh ${ec2_instance}:/home/ec2-user"
+        sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
+        sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
     }
 
 } 
