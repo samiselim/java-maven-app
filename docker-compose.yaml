@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   java-maven-app:
-    image: samiselim/java-maven-app-image:v1.0.3
+    image: samiselim/java-maven-app-image:1.0.3
     ports:
       - 8080:8080
   postgres:
