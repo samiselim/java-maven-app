@@ -28,6 +28,7 @@ def deployApp() {
     def userInput = input(
         id: 'userInput',
         message: 'Enter port number of your deployment:',
+        ok: 'Done',
         parameters: [
             string(name: 'DEPLOYMENT_PORT', defaultValue: '', description: 'Port number')
         ])
