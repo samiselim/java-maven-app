@@ -37,7 +37,7 @@ pipeline {
                 script {
                     echo "building image"
                     // gv.buildImage()
-                    buildImage()
+                    buildImage('samiselim/demo-java-maven-app')
                 }
             }
         }
