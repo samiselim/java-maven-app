@@ -11,6 +11,7 @@ pipeline {
         stage("init") {
             steps {
                 script { 
+                    echo "****************** Starting loading groovy scripts  **************"
                     gv = load "script.groovy"
                 }
             }
@@ -18,7 +19,7 @@ pipeline {
         stage("Increment Version"){
             steps{
                 script{
-                    echo "Incrementing Application version "
+                    echo "****************** Starting Incrementing Version  **************"
                     gv.incVersion()
                 }
             }
@@ -26,7 +27,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    echo "building jar"
+                    echo "****************** Starting Build Jar file using mvn  **************"
                     // gv.buildJar()
                     buildJar()
                 }
@@ -35,16 +36,18 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    echo "building image"
+                    echo "****************** Starting Build Docker  **************"
                     // gv.buildImage()
-                    buildImage('samiselim/demo-java-maven-app')
+                    dockerLogin('sami_docker_hub_credentials')
+                    dockerBuildImage('samiselim/java-maven-app-image')
+                    dockerPush('samiselim/java-maven-app-image')
                 }
             }
         }
         stage("deploy") {
             steps {
                 script {
-                    echo "deploying"
+                    echo "****************** Starting Deployment  **************"
                     gv.deployApp()
                 }
             }
@@ -53,7 +56,11 @@ pipeline {
             steps {
                 script {
                     // gv.commitChanges()
-                    commitChanges()
+                    echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
+                    githubLogin('java-maven-app' , 'sami_githubAcess')
+                    githubAddAllChanges()
+                    githubCommitAllChanges('This Commit from jenkins to update version number of the application for the next build')
+                    githubPush()
                 }
             }
         }
