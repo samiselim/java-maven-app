@@ -25,17 +25,9 @@ def incVersion(){
 }
 
 def deployApp() {
-    def userInput = input(
-        id: 'userInput',
-        message: 'Enter port number of your deployment:',
-        ok: 'Done',
-        parameters: [
-            string(name: 'DEPLOYMENT_PORT', defaultValue: '', description: 'Port number')
-        ])
 
-    def DEPLOYMENT_PORT = userInput.DEPLOYMENT_PORT
     echo 'deploying the application...'
-    def dockerCmd = "docker run -d -p ${DEPLOYMENT_PORT}:3080 samiselim/node-app:${env.IMAGE_VERSION}"
+    def dockerCmd = "docker run -d -p 3080:3080 samiselim/node-app:${env.IMAGE_VERSION}"
     sshagent(['ec2-server-cred']) {
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${dockerCmd}"
     }
