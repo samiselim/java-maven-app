@@ -20,13 +20,21 @@ def incVersion(){
     
     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'  // this code is reguler expression to extract version tag fro xml file 
     def version = matcher[0][1] // to extract the text of version only 
-    env.IMAGE_VERSION = "$version-$BUILD_NUMBER"
+    env.IMAGE_VERSION = "$version"
 
 }
 
 def deployApp() {
+    def userInput = input(
+        id: 'userInput',
+        message: 'Enter port number of your deployment:',
+        parameters: [
+            string(name: 'DEPLOYMENT_PORT', defaultValue: '', description: 'Port number')
+        ])
+
+    env.DEPLOYMENT_PORT = userInput.DEPLOYMENT_PORT
     echo 'deploying the application...'
-    def dockerCmd = 'docker run -d -p 3080:3080 samiselim/node-app:v1.0'
+    def dockerCmd = "docker run -d -p ${DEPLOYMENT_PORT}:3080 samiselim/node-app:${env.IMAGE_VERSION}"
     sshagent(['ec2-server-cred']) {
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${dockerCmd}"
     }
