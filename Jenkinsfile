@@ -4,7 +4,7 @@
 // without adding this lib globally in jenkins 
 library identifier: 'jenkins-shared-lib@main',retriever: modernSCM(
     [$class: 'GitSCMSource',
-      remot: 'https://github.com/samiselim/jenkins-shared-lib.git',
+      remote: 'https://github.com/samiselim/jenkins-shared-lib.git',
       credentialsId: 'sami_githubAcess'
     ]
 )
