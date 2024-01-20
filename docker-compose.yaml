@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   java-maven-app:
-    image: samiselim/java-maven-app-image:latest
+    image: samiselim/java-maven-app-image:v1.0.3
     ports:
       - 8080:8080
   postgres:
@@ -10,4 +10,3 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=my-pwd
-      
