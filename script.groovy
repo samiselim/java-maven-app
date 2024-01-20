@@ -32,7 +32,7 @@ def deployApp() {
             string(name: 'DEPLOYMENT_PORT', defaultValue: '', description: 'Port number')
         ])
 
-    env.DEPLOYMENT_PORT = userInput.DEPLOYMENT_PORT
+    def DEPLOYMENT_PORT = userInput.DEPLOYMENT_PORT
     echo 'deploying the application...'
     def dockerCmd = "docker run -d -p ${DEPLOYMENT_PORT}:3080 samiselim/node-app:${env.IMAGE_VERSION}"
     sshagent(['ec2-server-cred']) {
