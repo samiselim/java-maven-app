@@ -26,11 +26,10 @@ def incVersion(){
 
 def deployApp() {
     echo 'deploying the application...'
-    def dockerCmd = "docker run --name java-maven-app-container -d -p 3081:3080 ${env.IMAGE_NAME}"
+    def dockerCmd = "docker run --name java-maven-app-container -d -p 3081:3080 ${env.IMAGE_NAME}:${env.IMAGE_VERSION}"
     sshagent(['ec2-server-cred']) {
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${dockerCmd}"
     }
-
 } 
 
 
