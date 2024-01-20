@@ -26,7 +26,7 @@ def incVersion(){
 
 def deployApp() {
     echo 'deploying the application...'
-    def shellCmd = 'bash ./server-cmds.sh'
+    def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION}"
     sshagent(['ec2-server-cred']) {
         sh 'scp server-cmds.sh ec2-user@54.93.142.184:/home/ec2-user'
         sh 'scp docker-compose.yaml ec2-user@54.93.142.184:/home/ec2-user'

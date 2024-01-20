@@ -15,6 +15,9 @@ pipeline {
     tools{
         maven 'Maven'
     }
+    environment{
+        IMAGE_NAME="samiselim/java-maven-app-image"
+    }
     stages {
         stage("init") {
             steps {
