@@ -26,7 +26,7 @@ def incVersion(){
 
 def deployApp() {
     echo 'deploying the application...'
-    def dockerComposeCmd = 'docker-compose -f docke-compose.yaml up --detach '
+    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up --detach '
     sshagent(['ec2-server-cred']) {
         sh 'scp docker-compose.yaml ec2-user@54.93.142.184:/home/ec2-user'
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${dockerComposeCmd}"
