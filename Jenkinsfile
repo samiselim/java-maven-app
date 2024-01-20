@@ -15,10 +15,6 @@ pipeline {
     tools{
         maven 'Maven'
     }
-    environment{
-        IMAGE_NAME='java-maven-app-image'
-        REPO_NAME='java-maven-app'
-    }
     stages {
         stage("init") {
             steps {
@@ -51,8 +47,8 @@ pipeline {
                     echo "****************** Starting Build Docker  **************"
                     // gv.buildImage()
                     dockerLogin('sami_docker_hub_credentials')
-                    dockerBuildImage(env.IMAGE_NAME)
-                    dockerPush(env.IMAGE_NAME)
+                    dockerBuildImage('samiselim/java-maven-app-image')
+                    dockerPush('samiselim/java-maven-app-image')
                 }
             }
         }
@@ -68,8 +64,8 @@ pipeline {
             steps {
                 script {
                     // gv.commitChanges()
-                    echo "****************** Starting Adding ,Commiting and pushing Changes to ${env.REPO_NAME}  **************"
-                    githubLogin(env.REPO_NAME , 'sami_githubAcess')
+                    echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
+                    githubLogin('java-maven-app' , 'sami_githubAcess')
                     githubAddAllChanges()
                     githubCommitAllChanges('This Commit from jenkins to update version number of the application for the next build')
                     githubPush()
