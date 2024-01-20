@@ -26,6 +26,11 @@ def incVersion(){
 
 def deployApp() {
     echo 'deploying the application...'
+    def dockerCmd = 'docker run --name java-maven-app-container -d -p 3081:3080 samiselim/node-app:v1.0'
+    sshagent(['ec2-server-cred']) {
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.93.142.184 ${dockerCmd}"
+    }
+
 } 
 
 
