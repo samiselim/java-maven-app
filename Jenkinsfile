@@ -44,18 +44,6 @@ pipeline {
                 }
             }
         } 
-        stage("Commit Version Update") {
-            steps {
-                script {
-                    // gv.commitChanges()
-                    echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
-                    githubLogin('java-maven-app' , 'sami_githubAcess')
-                    githubAddAllChanges()
-                    githubCommitAllChanges('This Commit from jenkins to update version number of the application for the next build')
-                    githubPush()
-                }
-            }
-        }
         stage("build image") {
             steps {
                 script {
@@ -72,6 +60,18 @@ pipeline {
                 script {
                     echo "****************** Starting Deployment  **************"
                     gv.deployApp()
+                }
+            }
+        }
+        stage("Commit Version Update") {
+            steps {
+                script {
+                    // gv.commitChanges()
+                    echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
+                    githubLogin('java-maven-app' , 'sami_githubAcess')
+                    githubAddAllChanges()
+                    githubCommitAllChanges('This Commit from jenkins to update version number of the application for the next build')
+                    githubPush()
                 }
             }
         }
