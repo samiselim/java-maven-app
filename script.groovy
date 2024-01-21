@@ -28,7 +28,7 @@ def deployApp() {
     echo 'deploying the application...'
     def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION}"
     def ec2_instance = "ec2-user@18.159.208.204"
-    sshagent(['ec2-server-cred2']) {
+    sshagent(['ssh-cred']) {
         sh "scp server-cmds.sh ${ec2_instance}:/home/ec2-user"
         sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
         sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
