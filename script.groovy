@@ -36,7 +36,7 @@ def deployApp() {
     //     sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
     // }
     
-    sh "kubectl create deploymnt java-maven-app-deployment --image=${env.IMAGE_NAME}:${env.IMAGE_VERSION}"
+    sh "kubectl create deployment java-maven-app-deployment --image=${env.IMAGE_NAME}:${env.IMAGE_VERSION}"
 
 
 } 
