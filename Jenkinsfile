@@ -59,6 +59,7 @@ pipeline {
             environment{
                 AWS_ACCESS_KEY_ID = credentials('jenkins_aws_key_id')
                 AWS_ACCESS_ACCESS_KEY = credentials('jenkins_aws_secret_key')
+                AWS_REGION = 'us-west-1'
             }
             steps {
                 script {
