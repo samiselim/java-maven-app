@@ -55,11 +55,7 @@ def deployApp() {
             --docker-password=${env.xPASS}"
         }
     }
-    sh "kubectl create secret docker-registry secretRegistry\
-        --docker-server=docker.io\
-        --docker-username=samiselim\
-        --docker-password=${env.CRED['PASS']}"
-        
+
 
     /* Those command subistitute Enironment variables to equivelant inside k8 yaml file */
     sh 'envsubst < kubernetes/sami_deployment.yaml | kubectl apply -f -'
