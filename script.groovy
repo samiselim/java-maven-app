@@ -41,11 +41,29 @@ def deployApp() {
     // sh "aws configure set default.region ${AWS_REGION}"
     // sh "kubectl create deployment java-maven-app-deployment --image=${env.IMAGE_NAME}:${env.IMAGE_VERSION}"
     
-    
-    /* Those command subistitute Enironment variables to equivelant inside k8 yaml file */
-    sh 'envsubst < kubernetes/sami_deployment.yaml | kubectl delete -f -'
-    sh 'envsubst < kubernetes/sami_service.yaml | kubectl delete -f -'
+    /* Accessing DockerHub for pulling the image inside kubernetes */
+    /* using Creating secret inside cluster using kubectl */
 
+    def secretExists = sh(script: "kubectl get secret ${DOCKER_REGISTRY_SECRET}", returnStatus: true) == 0{
+        if (secretExists) {
+            echo "Secret '${DEPLOY_SECRET_NAME}' already exists. Skipping creation."
+        } else {
+            echo "Secret '${DEPLOY_SECRET_NAME}' does not exist. Creating the secret."
+            sh "kubectl create secret docker-registry secretRegistry\
+            --docker-server=docker.io\
+            --docker-username=samiselim\
+            --docker-password=${env.CRED['PASS']}"
+        }
+    }
+    sh "kubectl create secret docker-registry secretRegistry\
+        --docker-server=docker.io\
+        --docker-username=samiselim\
+        --docker-password=${env.CRED['PASS']}"
+        
+
+    /* Those command subistitute Enironment variables to equivelant inside k8 yaml file */
+    sh 'envsubst < kubernetes/sami_deployment.yaml | kubectl apply -f -'
+    sh 'envsubst < kubernetes/sami_service.yaml | kubectl apply -f -'
 } 
 
 

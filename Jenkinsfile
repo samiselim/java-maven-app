@@ -49,7 +49,7 @@ pipeline {
                 script {
                     echo "****************** Starting Build Docker  **************"
                     // gv.buildImage()
-                    dockerLogin('sami_docker_hub_credentials')
+                    env.CRED = dockerLogin('sami_docker_hub_credentials')
                     dockerBuildImage('samiselim/java-maven-app-image')
                     dockerPush('samiselim/java-maven-app-image')
                 }
@@ -61,6 +61,7 @@ pipeline {
                 AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_key')
                 DOCKER_REPO = 'samiselim/java-maven-app-image'
                 APP_NAME = 'java-maven-app'
+                DEPLOY_SECRET_NAME = 'SR'
                 // AWS_REGION = 'us-west-1'
             }
             steps {
