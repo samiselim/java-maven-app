@@ -44,15 +44,15 @@ def deployApp() {
     /* Accessing DockerHub for pulling the image inside kubernetes */
     /* using Creating secret inside cluster using kubectl */
 
-    def secretExists = sh(script: "kubectl get secret ${DOCKER_REGISTRY_SECRET}", returnStatus: true) == 0{
+    def secretExists = sh(script: "kubectl get secret SR", returnStatus: true) == 0{
         if (secretExists) {
-            echo "Secret '${DEPLOY_SECRET_NAME}' already exists. Skipping creation."
+            echo "Secret 'SR' already exists. Skipping creation."
         } else {
-            echo "Secret '${DEPLOY_SECRET_NAME}' does not exist. Creating the secret."
-            sh "kubectl create secret docker-registry secretRegistry\
+            echo "Secret 'SR' does not exist. Creating the secret."
+            sh "kubectl create secret docker-registry SR\
             --docker-server=docker.io\
             --docker-username=samiselim\
-            --docker-password=${env.CRED['PASS']}"
+            --docker-password=${env.xPASS}"
         }
     }
     sh "kubectl create secret docker-registry secretRegistry\
