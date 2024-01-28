@@ -44,17 +44,10 @@ def deployApp() {
     /* Accessing DockerHub for pulling the image inside kubernetes */
     /* using Creating secret inside cluster using kubectl */
 
-    def secretExists = sh(script: "kubectl get secret SR", returnStatus: true) == 0{
-        if (secretExists) {
-            echo "Secret 'SR' already exists. Skipping creation."
-        } else {
-            echo "Secret 'SR' does not exist. Creating the secret."
-            sh "kubectl create secret docker-registry SR\
-            --docker-server=docker.io\
-            --docker-username=samiselim\
-            --docker-password=${env.xPASS}"
-        }
-    }
+    sh "kubectl create secret docker-registry SR \
+    --docker-server=docker.io \
+    --docker-username=samiselim \
+    --docker-password=${env.xPASS}"
 
 
     /* Those command subistitute Enironment variables to equivelant inside k8 yaml file */
