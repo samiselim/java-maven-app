@@ -58,7 +58,7 @@ pipeline {
         stage("deploy") {
             environment{
                 AWS_ACCESS_KEY_ID = credentials('jenkins_aws_key_id')
-                AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_key')
+                AWS_SECRET_ACCESS_KEY = credentials('jenkins-secret-key')
                 DOCKER_REPO = 'samiselim/java-maven-app-image'
                 APP_NAME = 'java-maven-app'
                 // AWS_REGION = 'us-west-1'
