@@ -18,7 +18,7 @@ spec:
           - name: secret-reg
       containers:
       - name: $APP_NAME-container
-        image: samiselim/java-maven-app-image:1.0.5
+        image: $DOCKER_REPO/$IMAGE_NAME:$IMAGE_VERSION
         imagePullPolicy: Always
         ports:
         - containerPort: 8080 
