@@ -37,7 +37,7 @@ def deployApp() {
     // }
     
     sh "aws configure set aws_access_key_id ${env.AWS_ACCESS_KEY_ID}"
-    sh "aws configure set aws_secret_access_key ${env.AWS_ACCESS_ACCESS_KEY}"
+    sh "aws configure set aws_secret_access_key ${env.AWS_SECRET_ACCESS_KEY}"
     sh "aws configure set default.region ${AWS_REGION}"
     // sh "kubectl create deployment java-maven-app-deployment --image=${env.IMAGE_NAME}:${env.IMAGE_VERSION}"
     
