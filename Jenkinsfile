@@ -61,15 +61,11 @@ pipeline {
                 AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_key')
                 DOCKER_REPO = 'samiselim/java-maven-app-image'
                 APP_NAME = 'java-maven-app'
-                xPASS = ""
                 // AWS_REGION = 'us-west-1'
             }
             steps {
                 script {
                     echo "****************** Starting Deployment  **************"
-                    withCredentials([script.usernamePassword(credentialsId: "${dockerHubCred}", passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        env.xPASS = "$PASS"
-                    }
                     gv.deployApp()
                 }
             }

@@ -44,12 +44,6 @@ def deployApp() {
     /* Accessing DockerHub for pulling the image inside kubernetes */
     /* using Creating secret inside cluster using kubectl */
 
-    sh "kubectl create secret docker-registry SR \
-    --docker-server=docker.io \
-    --docker-username=samiselim \
-    --docker-password=${env.xPASS}"
-
-
     /* Those command subistitute Enironment variables to equivelant inside k8 yaml file */
     sh 'envsubst < kubernetes/sami_deployment.yaml | kubectl apply -f -'
     sh 'envsubst < kubernetes/sami_service.yaml | kubectl apply -f -'
