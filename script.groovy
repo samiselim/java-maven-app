@@ -25,14 +25,19 @@ def incVersion(){
 }
 
 def deployApp() {
+    
+    
     echo 'deploying the application...'
-    def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION}"
-    def ec2_instance = "ec2-user@18.159.208.204"
-    sshagent(['ssh-cred']) {
-        sh "scp server-cmds.sh ${ec2_instance}:/home/ec2-user"
-        sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
-        sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
-    }
+    // def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION}"
+    // def ec2_instance = "ec2-user@18.159.208.204"
+    // sshagent(['ssh-cred']) {
+    //     sh "scp server-cmds.sh ${ec2_instance}:/home/ec2-user"
+    //     sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
+    //     sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
+    // }
+    
+    sh "kubectl create deploymnt java-maven-app-deployment --image ${env.IMAGE_NAME}:${env.IMAGE_VERSION}"
+
 
 } 
 
