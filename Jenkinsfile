@@ -49,7 +49,7 @@ pipeline {
                 script {
                     echo "****************** Starting Build Docker  **************"
                     // gv.buildImage()
-                    env.CRED = dockerLogin('sami_docker_hub_credentials')
+                    dockerLogin('sami_docker_hub_credentials')
                     dockerBuildImage('samiselim/java-maven-app-image')
                     dockerPush('samiselim/java-maven-app-image')
                 }
