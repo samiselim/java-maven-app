@@ -43,8 +43,8 @@ def deployApp() {
     
     
     /* Those command subistitute Enironment variables to equivelant inside k8 yaml file */
-    sh 'envsubst < kubernetes/sami_deployment.yaml | kubectl apply -f -'
-    sh 'envsubst < kubernetes/sami_service.yaml | kubectl apply -f -'
+    sh 'envsubst < kubernetes/sami_deployment.yaml | kubectl delete -f -'
+    sh 'envsubst < kubernetes/sami_service.yaml | kubectl delete -f -'
 
 } 
 
