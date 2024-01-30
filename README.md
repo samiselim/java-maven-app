@@ -37,15 +37,16 @@ This project is a Java application that uses Maven for building, Docker for cont
 5. **Jenkins Pipeline**
 
     The Jenkins pipeline is defined in the `Jenkinsfile` at the root of the project. Ensure your Jenkins server is configured to use this file.
+    A Jenkins server is created and hosted as a container inside an instance on the Google Cloud Platform (GCP).
 
-6. **Kubernetes Deployment on AWS EKS**
+7. **Kubernetes Deployment on AWS EKS**
 
     ```bash
     # Apply Kubernetes configurations
     kubectl apply -f kubernetes/
     ```
 
-7. **Local kubectl for Management**
+8. **Local kubectl for Management**
 
     ```bash
     # Set Kubernetes context to AWS EKS
