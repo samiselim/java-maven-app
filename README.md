@@ -2,6 +2,7 @@
 
 This project is a Java application that uses Maven for building, Docker for containerization, Nexus for artifact hosting, Jenkins for continuous integration and deployment. It also involves deploying the application to AWS EKS with Kubernetes.
 
+### Hint: final Project at (deploy-on-aws-cluster) branch in this repo .
 ## Build and Deploy Steps
 
 1. **Maven Build**
