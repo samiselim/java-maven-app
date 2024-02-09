@@ -23,12 +23,12 @@ def deployApp() {
     echo 'deploying the to EC2...'
     echo "EC2_IP = ${EC2_PUBLIC_IP}"
     def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION} ${DOCKER_CRED_USR} ${DOCKER_CRED_PSW}"
-    def sheXpermision = "bash chmod +x server-cmds.sh"
+    // def sheXpermision = "bash chmod +x server-cmds.sh"
     def ec2_instance = "ec2-user@${EC2_PUBLIC_IP}"
     sshagent(['server_ssh_key']) {
         sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2_instance}:/home/ec2-user"
         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2_instance}:/home/ec2-user"
-        sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${sheXpermision}"
+        // sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${sheXpermision}"
         sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
     }
 
