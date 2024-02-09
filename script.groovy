@@ -11,18 +11,22 @@ def incVersion(){
 
 }
 def provisionServer(){
-    // terraform provision server 
-    // 1) create key pair 
-    // 2) install terraform in jenkins container 
-    // 3) creating terraform configs (terraform init)
+    dir('terraform_config'){
+        sh "terraform init"
+        sh "terraform apply --auto-approve"
+        EC2_PUBLIC_IP = sh(script: "terraform ouput ec2_public_ip" , returnStdout: true).trim()
+    }
+
 }
 def deployApp() {
-    echo 'deploying the application...'
+    sleep(time: 90 ,unit: "SECONDS") // to give provisioning its time to complete 
+    echo 'deploying the to EC2...'
+    echo "EC2_IP = ${EC2_PUBLIC_IP}"
     def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION}"
-    def ec2_instance = "ec2-user@18.159.208.204"
-    sshagent(['ssh-cred']) {
-        sh "scp server-cmds.sh ${ec2_instance}:/home/ec2-user"
-        sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
+    def ec2_instance = "ec2-user@${EC2_PUBLIC_IP}"
+    sshagent(['server_ssh_key']) {
+        sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2_instance}:/home/ec2-user"
+        sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2_instance}:/home/ec2-user"
         sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
     }
 

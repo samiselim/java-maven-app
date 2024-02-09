@@ -55,6 +55,19 @@ pipeline {
                 }
             }
         }
+        stage("prvisioning server using terraform") {
+            environment{
+                AWS_ACCESS_KEY_ID = credentials('AWSAccessKeyID')
+                AWS_SECRET_ACCESS_KEY = credentials('AWSAccessKeySecret')
+                TF_VAR_prefix = 'test'
+            }
+            steps {
+                script {
+                    echo "****************** Starting provisioning  **************"
+                    gv.provisionServer()
+                }
+            }
+        }
         stage("deploy") {
             steps {
                 script {
