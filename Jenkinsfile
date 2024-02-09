@@ -64,7 +64,7 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting provisioning  **************"
-                    //gv.provisionServer()
+                    gv.provisionServer()
                 }
             }
         }
