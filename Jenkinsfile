@@ -27,14 +27,14 @@ pipeline {
                 }
             }
         }
-        stage("Increment Version"){
-            steps{
-                script{
-                    echo "****************** Starting Incrementing Version  **************"
-                    gv.incVersion()
-                }
-            }
-        }
+        // stage("Increment Version"){
+        //     steps{
+        //         script{
+        //             echo "****************** Starting Incrementing Version  **************"
+                    // gv.incVersion()
+        //         }
+        //     }
+        // }
         stage("build jar") {
             steps {
                 script {
@@ -77,18 +77,18 @@ pipeline {
                 }
             }
         }
-        stage("Commit Version Update") {
-            steps {
-                script {
-                    gv.commitChanges()
-                    echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
-                    githubLogin('java-maven-app-pipeline-CICD' , 'sami_githubAcess')
-                    githubAddAllChanges()
-                    githubCommitAllChanges('This Commit from jenkins to update version number of the application for the next build')
-                    githubPush()
-                }
-            }
-        }
+        // stage("Commit Version Update") {
+        //     steps {
+        //         script {
+        //             gv.commitChanges()
+        //             echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
+        //             githubLogin('java-maven-app-pipeline-CICD' , 'sami_githubAcess')
+        //             githubAddAllChanges()
+        //             githubCommitAllChanges('This Commit from jenkins to update version number of the application for the next build')
+        //             githubPush()
+        //         }
+        //     }
+        // }
         
     }
 }
