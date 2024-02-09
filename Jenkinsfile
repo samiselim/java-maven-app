@@ -69,6 +69,9 @@ pipeline {
             }
         }
         stage("deploy") {
+            environment{
+                DOCKER_CRED = credentials('sami_docker_hub_credentials')
+            }
             steps {
                 script {
                     echo "****************** Starting Deployment  **************"
