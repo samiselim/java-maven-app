@@ -13,7 +13,15 @@ resource "aws_security_group" "security_group1" {
         from_port = 8080
         to_port = 8080
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = [var.ssh_ip]
+        
+    }
+     ingress  {
+        # here ther is from and to because you can define a range of ports ﻻ
+        from_port = 5432
+        to_port = 5432
+        protocol = "tcp"
+        cidr_blocks = [var.ssh_ip]
         
     }
     egress {
