@@ -39,7 +39,6 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting Build Jar file using mvn  **************"
-                    // gv.buildJar()
                     buildJar()
                 }
             }
@@ -48,7 +47,6 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting Build Docker  **************"
-                    // gv.buildImage()
                     dockerLogin('sami_docker_hub_credentials')
                     dockerBuildImage('samiselim/java-maven-app-image')
                     dockerPush('samiselim/java-maven-app-image')
