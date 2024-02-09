@@ -12,7 +12,7 @@ def incVersion(){
 }
 def provisionServer(){
     dir('terraform_config'){
-        sh "terraform init"
+        // sh "terraform init"
         sh "terraform destroy --auto-approve"
         EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip" , returnStdout: true).trim()
     }
