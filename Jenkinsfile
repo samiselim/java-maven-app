@@ -27,14 +27,14 @@ pipeline {
                 }
             }
         }
-        // stage("Increment Version"){
-        //     steps{
-        //         script{
-        //             echo "****************** Starting Incrementing Version  **************"
-                    // gv.incVersion()
-        //         }
-        //     }
-        // }
+        stage("Increment Version"){
+            steps{
+                script{
+                    echo "****************** Starting Incrementing Version  **************"
+                    gv.incVersion()
+                }
+            }
+        }
         stage("build jar") {
             steps {
                 script {
