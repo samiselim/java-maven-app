@@ -19,7 +19,7 @@ def provisionServer(){
 
 }
 def deployApp() {
-    sleep(time: 90 ,unit: "SECONDS") // to give provisioning its time to complete 
+    // sleep(time: 90 ,unit: "SECONDS") // to give provisioning its time to complete 
     echo 'deploying the to EC2...'
     echo "EC2_IP = ${EC2_PUBLIC_IP}"
     def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION} ${DOCKER_CRED_USR} ${DOCKER_CRED_PSW}"

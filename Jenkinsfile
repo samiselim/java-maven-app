@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting Deployment  **************"
-                    //gv.deployApp()
+                    gv.deployApp()
                 }
             }
         }
