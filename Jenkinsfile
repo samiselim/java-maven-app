@@ -40,7 +40,7 @@ pipeline {
                 script {
                     echo "****************** Starting Build Jar file using mvn  **************"
                     // gv.buildJar()
-                    buildJar()
+                    // buildJar()
                 }
             }
         } 
@@ -48,10 +48,10 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting Build Docker  **************"
-                    // gv.buildImage()
-                    dockerLogin('sami_docker_hub_credentials')
-                    dockerBuildImage('samiselim/java-maven-app-image')
-                    dockerPush('samiselim/java-maven-app-image')
+                    // // gv.buildImage()
+                    // dockerLogin('sami_docker_hub_credentials')
+                    // dockerBuildImage('samiselim/java-maven-app-image')
+                    // dockerPush('samiselim/java-maven-app-image')
                 }
             }
         }
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting provisioning  **************"
-                    gv.provisionServer()
+                    // gv.provisionServer()
                 }
             }
         }
@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting Deployment  **************"
-                    gv.deployApp()
+                    // gv.deployApp()
                 }
             }
         }
