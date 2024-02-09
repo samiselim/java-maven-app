@@ -75,14 +75,14 @@ pipeline {
             steps {
                 script {
                     echo "****************** Starting Deployment  **************"
-                    gv.deployApp()
+                    //gv.deployApp()
                 }
             }
         }
         stage("Commit Version Update") {
             steps {
                 script {
-                    // gv.commitChanges()
+                    gv.commitChanges()
                     echo "****************** Starting Adding ,Commiting and pushing Changes to Git hub  **************"
                     githubLogin('java-maven-app-pipeline-CICD' , 'sami_githubAcess')
                     githubAddAllChanges()
