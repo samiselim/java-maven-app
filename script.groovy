@@ -14,16 +14,16 @@ def provisionServer(){
     dir('terraform_config'){
         // sh "terraform init"
         // sh "terraform apply --auto-approve"
-        EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip" , returnStdout: true).trim()
+        // EC2_PUBLIC_IP = sh(script: "terraform output ec2_public_ip" , returnStdout: true).trim()
     }
 
 }
 def deployApp() {
     // sleep(time: 90 ,unit: "SECONDS") // to give provisioning its time to complete 
     echo 'deploying the to EC2...'
-    echo "EC2_IP = ${EC2_PUBLIC_IP}"
+    // echo "EC2_IP = ${EC2_PUBLIC_IP}"
     def shellCmd = "bash ./server-cmds.sh ${env.IMAGE_NAME} ${env.IMAGE_VERSION} ${DOCKER_CRED_USR} ${DOCKER_CRED_PSW}"
-    def ec2_instance = "ec2-user@${EC2_PUBLIC_IP}"
+    def ec2_instance = "ec2-user@15.237.177.76"
     sshagent(['server_ssh_key']) {
         sh "scp -o StrictHostKeyChecking=no server-cmds.sh ${ec2_instance}:/home/ec2-user"
         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${ec2_instance}:/home/ec2-user"
