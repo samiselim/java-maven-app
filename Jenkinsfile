@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-// @Library('jenkins-shared-lib')
+// @Library('jenkins-shared-lib') _
 
 // without adding this lib globally in jenkins 
 library identifier: 'jenkins-shared-lib@main',retriever: modernSCM(
